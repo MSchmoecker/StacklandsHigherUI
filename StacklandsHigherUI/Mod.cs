@@ -13,47 +13,37 @@ namespace StacklandsHigherUI {
 
         private static Harmony harmony;
 
-        private static ConfigEntry<float> sideBarHeight;
         private static ConfigEntry<float> infoBoxHeight;
 
         private void Awake() {
             harmony = new Harmony(GUID);
             harmony.PatchAll();
 
-            // 420 is vanilla
-            sideBarHeight = Config.Bind("UI", "Sidebar Height", 620f, "Height of the side bar");
-            sideBarHeight.SettingChanged += (_1, _2) => UpdateSideBarHeight();
-
             // 200 is vanilla
-            infoBoxHeight = Config.Bind("UI", "Info Box Height", 360f, "Height of the info box");
-            infoBoxHeight.SettingChanged += (_1, _2) => UpdateInfoBoxHeight();
+            infoBoxHeight = Config.Bind("UI", "Info Box Height", 400f, "Height of the info box");
+            infoBoxHeight.SettingChanged += (_1, _2) => UpdateHeights();
         }
 
         [HarmonyPatch(typeof(GameScreen), nameof(GameScreen.Awake)), HarmonyPostfix]
         private static void AfterGameScreenAwake() {
-            UpdateSideBarHeight();
-            UpdateInfoBoxHeight();
+            UpdateHeights();
         }
 
-        private static void UpdateSideBarHeight() {
+        private static void UpdateHeights() {
             if (!GameScreen.instance) {
                 return;
             }
 
-            Vector2 sizeDelta = GameScreen.instance.SideTransform.sizeDelta;
-            sizeDelta.y = sideBarHeight.Value;
-            GameScreen.instance.SideTransform.sizeDelta = sizeDelta;
-        }
-
-        private static void UpdateInfoBoxHeight() {
-            if (!GameScreen.instance) {
-                return;
-            }
-
-            RectTransform infoBox = (RectTransform)GameScreen.instance.InfoBoxBackground.transform.parent;
+            // InfoBox
+            RectTransform infoBox = (RectTransform)GameScreen.instance.ValueParent.transform.parent;
             Vector2 sizeDelta = infoBox.sizeDelta;
             sizeDelta.y = infoBoxHeight.Value;
             infoBox.sizeDelta = sizeDelta;
+
+            // SideBar
+            sizeDelta = GameScreen.instance.SideTransform.sizeDelta;
+            sizeDelta.y = - infoBoxHeight.Value - 15;
+            GameScreen.instance.SideTransform.sizeDelta = sizeDelta;
         }
     }
 }
