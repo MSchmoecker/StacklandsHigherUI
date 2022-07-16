@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StacklandsHigherUI", "StacklandsHigherUI\StacklandsHigherUI.csproj", "{4B8ED274-D0E6-4D6D-886C-817C162ED1C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HigherSidebar", "HigherSidebar\HigherSidebar.csproj", "{4B8ED274-D0E6-4D6D-886C-817C162ED1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

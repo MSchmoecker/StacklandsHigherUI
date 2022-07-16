@@ -7,8 +7,8 @@
     <ProjectGuid>{4B8ED274-D0E6-4D6D-886C-817C162ED1C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StacklandsHigherUI</RootNamespace>
-    <AssemblyName>StacklandsHigherUI</AssemblyName>
+    <RootNamespace>HigherSidebar</RootNamespace>
+    <AssemblyName>HigherSidebar</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -74,6 +74,6 @@
     <GAME_PATH>E:\Programme\Steam\steamapps\common\Stacklands</GAME_PATH>
   </PropertyGroup>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(GAME_PATH)\BepInEx\plugins" />
+    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFiles="$(GAME_PATH)\BepInEx\plugins\HigherSidebar.dll" />
   </Target>
 </Project>

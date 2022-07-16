@@ -3,11 +3,11 @@ using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
 
-namespace StacklandsHigherUI {
+namespace HigherSidebar {
     [BepInPlugin(GUID, Name, Version)]
     [HarmonyPatch]
     public class Mod : BaseUnityPlugin {
-        public const string Name = "Higher UI";
+        public const string Name = "Higher Sidebar";
         public const string GUID = "com.maxsch.stacklands.higherui";
         public const string Version = "0.1.0";
 
