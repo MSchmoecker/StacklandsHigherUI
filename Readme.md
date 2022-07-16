@@ -24,5 +24,5 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 ## Development
 1. Install BepInEx
 2. Set your `GAME_PATH` in `StacklandsHigherUI.csproj`
-3. This mod requires publicized game code, this removes the need to get private members via heavy Reflection code. Use https://github.com/CabbageCrow/AssemblyPublicizer for example to publicize `Stacklands/Stacklands_Data/Managed/Assembly-CSharp.dll`
+3. This mod requires publicized game code, this removes the need to get private members via heavy Reflection code. Use https://github.com/CabbageCrow/AssemblyPublicizer for example to publicize `Stacklands/Stacklands_Data/Managed/GameScripts.dll`
 4. Compile the project. This copies the resulting dll into `<GAME_PATH>/BepInEx/plugins/`
