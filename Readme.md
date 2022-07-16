@@ -26,3 +26,11 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 2. Set your `GAME_PATH` in `HigherSidebar.csproj`
 3. This mod requires publicized game code, this removes the need to get private members via heavy Reflection code. Use https://github.com/CabbageCrow/AssemblyPublicizer for example to publicize `Stacklands/Stacklands_Data/Managed/GameScripts.dll`
 4. Compile the project. This copies the resulting dll into `<GAME_PATH>/BepInEx/plugins/`
+
+## Changelog
+0.1.1
+- Updated mod for game version 1.1.4 (islands update). As the sidebar now takes the remaining space, only the info box height has to be configured (thanks benediktwerner!)
+- Changed BepInEx display name and dll name to Higher Sidebar. Make sure to delete the old `StacklandsHigherUI.dll`
+
+0.1.0
+- Initial release

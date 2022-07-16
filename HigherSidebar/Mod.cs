@@ -9,7 +9,7 @@ namespace HigherSidebar {
     public class Mod : BaseUnityPlugin {
         public const string Name = "Higher Sidebar";
         public const string GUID = "com.maxsch.stacklands.higherui";
-        public const string Version = "0.1.0";
+        public const string Version = "0.1.1";
 
         private static Harmony harmony;
 
@@ -20,7 +20,7 @@ namespace HigherSidebar {
             harmony.PatchAll();
 
             // 200 is vanilla
-            infoBoxHeight = Config.Bind("UI", "Info Box Height", 400f, "Height of the info box");
+            infoBoxHeight = Config.Bind("UI", "Info Box Height", 400f, "Height of the info box. Vanilla is 200");
             infoBoxHeight.SettingChanged += (_1, _2) => UpdateHeights();
         }
 
