@@ -5,7 +5,7 @@ Increases the height of sidebar elements.
 ![BepInExSetup](Docs/Showcase.png)
 
 ## Config
-The height of the info box can be set individually and the remaining space is filled with the sidebar.
+The height of the info box can be set custom and the remaining space is filled with the sidebar.
 The config entries are generated after the first start at `BepInEx/config/com.maxsch.stacklands.higherui.cfg`.
 
 ## Installation
@@ -32,6 +32,9 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 - [Offical Stacklands Discord](https://discord.gg/sokpop), my Discord tag: Margmas#9562
 
 ## Changelog
+0.1.2
+- Added ability to change the debug panel height (thanks benediktwerner!)
+
 0.1.1
 - Updated mod for game version 1.1.4 (islands update). As the sidebar now takes the remaining space, only the info box height has to be configured (thanks benediktwerner!)
 - Changed BepInEx display name and dll name to Higher Sidebar. Make sure to delete the old `StacklandsHigherUI.dll`
