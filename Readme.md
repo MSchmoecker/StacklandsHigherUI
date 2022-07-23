@@ -2,13 +2,13 @@
 ## About
 Increases the height of sidebar elements.
 
-![BepInExSetup](Docs/Showcase.png)
+![Showcase](https://raw.githubusercontent.com/MSchmoecker/StacklandsHigherUI/master/Docs/Showcase.png)
 
 ## Config
 The height of the info box can be set custom and the remaining space is filled with the sidebar.
 The config entries are generated after the first start at `BepInEx/config/com.maxsch.stacklands.higherui.cfg`.
 
-## Installation
+## Manual Installation
 This mod requires BepInEx to work, it is a modding framework that allows multiple mods being loaded.
 Furthermore, this mod uses Harmony to patch into the game, which means no game code is distributed and allows multiple mods to change it interdependent.
 
@@ -32,6 +32,9 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 - [Offical Stacklands Discord](https://discord.gg/sokpop), my Discord tag: Margmas#9562
 
 ## Changelog
+0.1.3
+- Updated Thunderstore Readme
+
 0.1.2
 - Added ability to change the debug panel height (thanks benediktwerner!)
 
