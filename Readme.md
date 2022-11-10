@@ -32,6 +32,9 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 - [Offical Stacklands Discord](https://discord.gg/sokpop), my Discord tag: Margmas#9562
 
 ## Changelog
+0.1.4
+- Updated mod for game version 1.2.2 (dark forest update). This removes the configuration for the debug panel, since it is now at full height anyway (thanks benediktwerner!)
+
 0.1.3
 - Updated Thunderstore Readme
 
