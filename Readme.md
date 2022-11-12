@@ -8,6 +8,9 @@ Increases the height of sidebar elements.
 The height of the info box can be set custom and the remaining space is filled with the sidebar.
 The config entries are generated after the first start at `BepInEx/config/com.maxsch.stacklands.higherui.cfg`.
 
+The config file can also be edited while the game is running, the changes will be applied in-game upon saving the file.
+
+
 ## Manual Installation
 This mod requires BepInEx to work, it is a modding framework that allows multiple mods being loaded.
 Furthermore, this mod uses Harmony to patch into the game, which means no game code is distributed and allows multiple mods to change it interdependent.
@@ -16,8 +19,10 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 3. Download this mod and extract it into `BepInEx/plugins/`
 4. Launch the game! If everything works, you should already see that the height of the sidebar elements is increased.
 
+
 ## Useful Tools
 - ConfigurationManager (https://github.com/BepInEx/BepInEx.ConfigurationManager/releases): Adds the ability to change the config at runtime.
+
 
 ## Development
 1. Install BepInEx
@@ -25,13 +30,18 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 3. This mod requires publicized game code, this removes the need to get private members via heavy Reflection code. Use https://github.com/CabbageCrow/AssemblyPublicizer for example to publicize `Stacklands/Stacklands_Data/Managed/GameScripts.dll`
 4. Compile the project. This copies the resulting dll into `<GAME_PATH>/BepInEx/plugins/`
 
+
 ## Links
 - Github: [https://github.com/MSchmoecker/StacklandsHigherUI](https://github.com/MSchmoecker/StacklandsHigherUI)
 - Thunderstore: [https://stacklands.thunderstore.io/package/MSchmoecker/HigherSidebar](https://stacklands.thunderstore.io/package/MSchmoecker/HigherSidebar)
 - Nexus: [https://www.nexusmods.com/stacklands/mods/4](https://www.nexusmods.com/stacklands/mods/4)
 - [Offical Stacklands Discord](https://discord.gg/sokpop), my Discord tag: Margmas#9562
 
+
 ## Changelog
+0.1.5
+- Added a config watcher to reload the config in-game when the file changes
+
 0.1.4
 - Updated mod for game version 1.2.2 (dark forest update). This removes the configuration for the debug panel, since it is now at full height anyway (thanks benediktwerner!)
 

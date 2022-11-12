@@ -11,7 +11,7 @@ namespace HigherSidebar {
     public class Mod : BaseUnityPlugin {
         public const string Name = "Higher Sidebar";
         public const string GUID = "com.maxsch.stacklands.higherui";
-        public const string Version = "0.1.4";
+        public const string Version = "0.1.5";
 
         private static Harmony harmony;
 
