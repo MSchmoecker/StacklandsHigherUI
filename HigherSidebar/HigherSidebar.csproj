@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile></DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,12 +32,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BepInEx">
@@ -61,6 +64,10 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>$(GAME_PATH)\Stacklands_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>$(GAME_PATH)\Stacklands_Data\Managed\Unity.TextMeshPro.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
@@ -88,6 +95,6 @@
     <Copy SourceFiles="../README.md" DestinationFolder="$(TMP_OUTPUT_PATH)" />
     <Copy SourceFiles="../icon.png" DestinationFolder="$(TMP_OUTPUT_PATH)" />
     <ZipDirectory Overwrite="true" SourceDirectory="$(TMP_OUTPUT_PATH)" DestinationFile="$(OUTPUT_PATH)/HigherSidebar-Thunderstore.zip" />
-    <Unzip SourceFiles="$(OUTPUT_PATH)/HigherSidebar-Thunderstore.zip" DestinationFolder="$(OUTPUT_PATH)"/>
+    <Unzip SourceFiles="$(OUTPUT_PATH)/HigherSidebar-Thunderstore.zip" DestinationFolder="$(OUTPUT_PATH)" />
   </Target>
 </Project>
