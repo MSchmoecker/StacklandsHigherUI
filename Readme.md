@@ -1,27 +1,21 @@
 # Higher Sidebar
 ## About
-Increases the height of sidebar elements.
+Increases the height of the info text box.
 
 ![Showcase](https://raw.githubusercontent.com/MSchmoecker/StacklandsHigherUI/master/Docs/Showcase.png)
 
 ## Config
 The height of the info box can be set custom and the remaining space is filled with the sidebar.
-The config entries are generated after the first start at `BepInEx/config/com.maxsch.stacklands.higherui.cfg`.
+By default the info box is scaled dynamically by the needed text space, this can be toggled with "Use Dynamic Height" to use a static height.
 
-The config file can also be edited while the game is running, the changes will be applied in-game upon saving the file.
+The config entries are generated after the first start at `BepInEx/config/com.maxsch.stacklands.higherui.cfg`.
+The config file can also be edited while the game is running and the changes will be applied in-game upon saving the file.
 
 
 ## Manual Installation
-This mod requires BepInEx to work, it is a modding framework that allows multiple mods being loaded.
-Furthermore, this mod uses Harmony to patch into the game, which means no game code is distributed and allows multiple mods to change it interdependent.
-
 1. Download and install BepInEx from [Thunderstore](https://stacklands.thunderstore.io/package/BepInEx/BepInExPack_Stacklands)
-3. Download this mod and extract it into `BepInEx/plugins/`
-4. Launch the game! If everything works, you should already see that the height of the sidebar elements is increased.
-
-
-## Useful Tools
-- ConfigurationManager (https://github.com/BepInEx/BepInEx.ConfigurationManager/releases): Adds the ability to change the config at runtime.
+2. Download this mod and extract it into `BepInEx/plugins/`
+3. Launch the game! If everything works, you should already see that the height of the sidebar elements is increased.
 
 
 ## Development
@@ -39,6 +33,9 @@ Furthermore, this mod uses Harmony to patch into the game, which means no game c
 
 
 ## Changelog
+0.2.0
+- Changed the static height to a dynamic height which is calculated by the needed text space. Can be toggled in the config
+
 0.1.5
 - Added a config watcher to reload the config in-game when the file changes
 

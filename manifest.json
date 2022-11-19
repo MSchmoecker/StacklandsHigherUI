@@ -1,7 +1,7 @@
 {
 	"name": "HigherSidebar",
-	"description": "Increases the height of sidebar elements",
-	"version_number": "0.1.5",
+	"description": "Increases the height of the info text box",
+	"version_number": "0.2.0",
 	"website_url": "https://github.com/MSchmoecker/StacklandsHigherUI",
 	"dependencies": [
 		"BepInEx-BepInExPack_Stacklands-5.4.2100"
