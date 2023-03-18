@@ -20,8 +20,10 @@ namespace HigherSidebar {
         private static ConfigEntry<float> infoBoxMaxHeight;
         private static ConfigEntry<float> infoBoxHeight;
         private static ConfigEntry<bool> dynamicHeight;
+        private static ConfigEntry<float> heightChangeCooldown;
 
         private static float lastHeight;
+        private static float heightCooldown;
 
         private void Awake() {
             harmony = new Harmony(GUID);
@@ -45,6 +47,10 @@ namespace HigherSidebar {
             description = $"Height of the info box. Used if Dynamic Height is not active. Vanilla is 300.{Environment.NewLine}{reload}";
             infoBoxHeight = Config.Bind("UI", "Info Box Height", 400f, description);
             infoBoxHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
+
+            description = $"Time before the dynamic height is shrunken again. Helps to prevent flickering.{Environment.NewLine}{reload}";
+            heightChangeCooldown = Config.Bind("Dynamic UI", "Height Change Cooldown", 0.1f, description);
+            heightChangeCooldown.SettingChanged += (_1, _2) => UpdateSidebarHeights();
 
             CreateConfigWatcher();
         }
@@ -70,7 +76,7 @@ namespace HigherSidebar {
             }
 
             GameScreen.instance.InfoText.text = GameScreen.instance.InfoText.text.Trim();
-            float preferredHeight = GameScreen.instance.Valuetext.preferredHeight + GameScreen.instance.InfoText.preferredHeight + 70f;
+            float preferredHeight = GameScreen.instance.Valuetext.preferredHeight + GameScreen.instance.InfoText.preferredHeight + 72f;
             return Mathf.Clamp(preferredHeight, infoBoxMinHeight.Value, infoBoxMaxHeight.Value);
         }
 
@@ -82,10 +88,17 @@ namespace HigherSidebar {
             float newHeight = CalculateHeight();
 
             if (Math.Abs(lastHeight - newHeight) < 1f) {
+                heightCooldown = 0f;
+                return;
+            }
+
+            if (newHeight < lastHeight && heightCooldown < heightChangeCooldown.Value) {
+                heightCooldown += Time.deltaTime;
                 return;
             }
 
             lastHeight = newHeight;
+            heightCooldown = 0f;
 
             // InfoBox
             RectTransform infoBox = (RectTransform)GameScreen.instance.InfoBox.transform;
