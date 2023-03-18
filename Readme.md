@@ -33,6 +33,10 @@ The config file can also be edited while the game is running and the changes wil
 
 
 ## Changelog
+0.3.0
+- Added a short cooldown (0.1 sec) before the info box shrinks again. This helps to reduce fast box resizes a bit when moving between cards. Can be adjusted in the config
+- Fixed the info box could grow too big and cancel the current text that is hovered, causing the side bar to flicker. Only the info box is scaled now and not the whole side bar anymore
+
 0.2.0
 - Changed the static height to a dynamic height which is calculated by the needed text space. Can be toggled in the config
 

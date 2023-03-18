@@ -13,7 +13,7 @@ namespace HigherSidebar {
     public class Mod : BaseUnityPlugin {
         public const string Name = "Higher Sidebar";
         public const string GUID = "com.maxsch.stacklands.higherui";
-        public const string Version = "0.2.0";
+        public const string Version = "0.3.0";
 
         private static Harmony harmony;
 
@@ -49,7 +49,7 @@ namespace HigherSidebar {
             infoBoxHeight = Config.Bind("UI", "Info Box Height", 400f, description);
             infoBoxHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
 
-            description = $"Time before the dynamic height is shrunken again. Helps to prevent flickering.{Environment.NewLine}{reload}";
+            description = $"Time before the dynamic height is shrunken again. Helps to box resizes when moving between cards.{Environment.NewLine}{reload}";
             heightChangeCooldown = Config.Bind("Dynamic UI", "Height Change Cooldown", 0.1f, description);
             heightChangeCooldown.SettingChanged += (_1, _2) => UpdateSidebarHeights();
 
