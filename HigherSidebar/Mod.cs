@@ -3,6 +3,7 @@ using System.IO;
 using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,6 +71,17 @@ namespace HigherSidebar {
             UpdateSidebarHeights();
         }
 
+        [HarmonyPatch(typeof(GameScreen), nameof(GameScreen.Awake)), HarmonyPostfix]
+        private static void AfterGameScreenAwake() {
+            foreach (Image image in GameScreen.instance.InfoBox.GetComponentsInChildren<Image>()) {
+                image.raycastTarget = false;
+            }
+
+            foreach (TextMeshProUGUI image in GameScreen.instance.InfoBox.GetComponentsInChildren<TextMeshProUGUI>()) {
+                image.raycastTarget = false;
+            }
+        }
+
         private static float CalculateHeight() {
             if (!dynamicHeight.Value) {
                 return infoBoxHeight.Value;
@@ -105,11 +117,6 @@ namespace HigherSidebar {
             Vector2 sizeDelta = infoBox.sizeDelta;
             sizeDelta.y = newHeight;
             infoBox.sizeDelta = sizeDelta;
-
-            // SideBar
-            sizeDelta = GameScreen.instance.SideTransform.sizeDelta;
-            sizeDelta.y = -newHeight - 15;
-            GameScreen.instance.SideTransform.sizeDelta = sizeDelta;
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(GameScreen.instance.SideTransform);
         }
