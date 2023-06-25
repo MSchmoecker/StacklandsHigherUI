@@ -42,12 +42,8 @@
     <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BepInEx">
-      <HintPath>$(GAME_PATH)\BepInEx\core\BepInEx.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
     <Reference Include="0Harmony">
-      <HintPath>$(GAME_PATH)\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>$(GAME_PATH)\Stacklands_Data\Managed\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="GameScripts">
@@ -72,7 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mod.cs" />
+    <Compile Include="HigherSidebarMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,18 +79,15 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <GAME_PATH>E:\Programme\Steam\steamapps\common\Stacklands</GAME_PATH>
-    <OUTPUT_PATH>$(GAME_PATH)/BepInEx/plugins/HigherSidebar</OUTPUT_PATH>
+    <OUTPUT_PATH>$(AppData)/../LocalLow/sokpop/Stacklands/Mods/HigherSidebar</OUTPUT_PATH>
     <TMP_OUTPUT_PATH>$(TargetDir)/tmp</TMP_OUTPUT_PATH>
   </PropertyGroup>
   <Target Name="AfterBuild">
     <RemoveDir Directories="$(TMP_OUTPUT_PATH)" />
     <MakeDir Directories="$(OUTPUT_PATH)" />
-    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TMP_OUTPUT_PATH)" />
-    <ZipDirectory Overwrite="true" SourceDirectory="$(TMP_OUTPUT_PATH)" DestinationFile="$(OUTPUT_PATH)/HigherSidebar-Nexus.zip" />
+    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFiles="$(TMP_OUTPUT_PATH)/com.maxsch.stacklands.highersidebar.dll" />
     <Copy SourceFiles="../manifest.json" DestinationFolder="$(TMP_OUTPUT_PATH)" />
-    <Copy SourceFiles="../README.md" DestinationFolder="$(TMP_OUTPUT_PATH)" />
-    <Copy SourceFiles="../icon.png" DestinationFolder="$(TMP_OUTPUT_PATH)" />
-    <ZipDirectory Overwrite="true" SourceDirectory="$(TMP_OUTPUT_PATH)" DestinationFile="$(OUTPUT_PATH)/HigherSidebar-Thunderstore.zip" />
-    <Unzip SourceFiles="$(OUTPUT_PATH)/HigherSidebar-Thunderstore.zip" DestinationFolder="$(OUTPUT_PATH)" />
+    <ZipDirectory Overwrite="true" SourceDirectory="$(TMP_OUTPUT_PATH)" DestinationFile="$(OUTPUT_PATH)/HigherSidebar.zip" />
+    <Unzip SourceFiles="$(OUTPUT_PATH)/HigherSidebar.zip" DestinationFolder="$(OUTPUT_PATH)" />
   </Target>
 </Project>
