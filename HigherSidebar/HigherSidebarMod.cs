@@ -22,10 +22,12 @@ namespace HigherSidebar {
         private static float lastHeight;
         private static float heightCooldown;
 
-        public override void Ready() {
+        private void Awake() {
             harmony = new Harmony(GUID);
             harmony.PatchAll();
+        }
 
+        public override void Ready() {
             const string reload = "Reloads in-game when the config file is edited or a configuration manager is used.";
             string description = "";
 
@@ -40,7 +42,7 @@ namespace HigherSidebar {
             // infoBoxMinHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
 
             description = $"Max height of the info box. Used if Dynamic Height is active.{Environment.NewLine}{reload}";
-            infoBoxMaxHeight = Config.GetEntry<float>( "Info Box Max Height", 700f);
+            infoBoxMaxHeight = Config.GetEntry<float>("Info Box Max Height", 700f);
             infoBoxMaxHeight.ExtraData["tooltip"] = description;
             // infoBoxMaxHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
 
