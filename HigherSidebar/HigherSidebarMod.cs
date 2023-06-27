@@ -83,7 +83,15 @@ namespace HigherSidebar {
             }
 
             GameScreen.instance.InfoText.text = GameScreen.instance.InfoText.text.Trim();
+
             float preferredHeight = GameScreen.instance.Valuetext.preferredHeight + GameScreen.instance.InfoText.preferredHeight + 72f;
+
+            foreach (GameObject divider in GameScreen.instance.dividerList) {
+                if (divider.activeInHierarchy && divider.TryGetComponent(out VerticalLayoutGroup verticalLayoutGroup)) {
+                    preferredHeight += verticalLayoutGroup.preferredHeight + verticalLayoutGroup.spacing;
+                }
+            }
+
             return Mathf.Clamp(preferredHeight, infoBoxMinHeight.GetFloat(), infoBoxMaxHeight.GetFloat());
         }
 
