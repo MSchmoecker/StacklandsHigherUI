@@ -27,6 +27,10 @@ namespace HigherSidebar {
             harmony.PatchAll();
         }
 
+        private void OnDestroy() {
+            harmony.UnpatchSelf();
+        }
+
         public override void Ready() {
             const string reload = "Reloads in-game when the config file is edited or a configuration manager is used.";
             string description = "";
