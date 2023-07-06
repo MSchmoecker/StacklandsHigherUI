@@ -9,7 +9,7 @@ namespace HigherSidebar {
     public class HigherSidebarMod : Mod {
         public const string Name = "Higher Sidebar";
         public const string GUID = "com.maxsch.stacklands.higherui";
-        public const string Version = "0.4.0";
+        public const string Version = "0.4.1";
 
         private static Harmony harmony;
 
