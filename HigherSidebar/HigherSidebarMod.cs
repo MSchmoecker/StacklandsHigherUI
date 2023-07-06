@@ -13,11 +13,11 @@ namespace HigherSidebar {
 
         private static Harmony harmony;
 
-        private static ConfigEntry infoBoxMinHeight;
-        private static ConfigEntry infoBoxMaxHeight;
-        private static ConfigEntry infoBoxHeight;
-        private static ConfigEntry dynamicHeight;
-        private static ConfigEntry heightChangeCooldown;
+        private static ConfigEntry<float> infoBoxMinHeight;
+        private static ConfigEntry<float> infoBoxMaxHeight;
+        private static ConfigEntry<float> infoBoxHeight;
+        private static ConfigEntry<bool> dynamicHeight;
+        private static ConfigEntry<float> heightChangeCooldown;
 
         private static float lastHeight;
         private static float heightCooldown;
@@ -32,33 +32,30 @@ namespace HigherSidebar {
         }
 
         public override void Ready() {
-            const string reload = "Reloads in-game when the config file is edited or a configuration manager is used.";
-            string description = "";
+            dynamicHeight = Config.GetEntry<bool>("Use Dynamic Height", true, new ConfigUI {
+                Tooltip = $"Dynamically resize the info box based on the preferred text height",
+            });
+            dynamicHeight.OnChanged += (_) => UpdateSidebarHeights();
 
-            description = $"Dynamically resize the info box based on the preferred text height.{Environment.NewLine}{reload}";
-            dynamicHeight = Config.GetEntry<bool>("Use Dynamic Height", true);
-            dynamicHeight.ExtraData["tooltip"] = description;
-            // dynamicHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
+            infoBoxMinHeight = Config.GetEntry<float>("Info Box Min Height", 300f, new ConfigUI {
+                Tooltip = $"Min height of the info box. Used if Dynamic Height is active",
+            });
+            infoBoxMinHeight.OnChanged += (_) => UpdateSidebarHeights();
 
-            description = $"Min height of the info box. Used if Dynamic Height is active.{Environment.NewLine}{reload}";
-            infoBoxMinHeight = Config.GetEntry<float>("Info Box Min Height", 300f);
-            infoBoxMinHeight.ExtraData["tooltip"] = description;
-            // infoBoxMinHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
+            infoBoxMaxHeight = Config.GetEntry<float>("Info Box Max Height", 700f, new ConfigUI {
+                Tooltip = $"Max height of the info box. Used if Dynamic Height is active",
+            });
+            infoBoxMaxHeight.OnChanged += (_) => UpdateSidebarHeights();
 
-            description = $"Max height of the info box. Used if Dynamic Height is active.{Environment.NewLine}{reload}";
-            infoBoxMaxHeight = Config.GetEntry<float>("Info Box Max Height", 700f);
-            infoBoxMaxHeight.ExtraData["tooltip"] = description;
-            // infoBoxMaxHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
+            infoBoxHeight = Config.GetEntry<float>("Info Box Height", 400f, new ConfigUI {
+                Tooltip = $"Height of the info box. Used if Dynamic Height is not active. Vanilla is 300.",
+            });
+            infoBoxHeight.OnChanged += (_) => UpdateSidebarHeights();
 
-            description = $"Height of the info box. Used if Dynamic Height is not active. Vanilla is 300.{Environment.NewLine}{reload}";
-            infoBoxHeight = Config.GetEntry<float>("Info Box Height", 400f);
-            infoBoxHeight.ExtraData["tooltip"] = description;
-            // infoBoxHeight.SettingChanged += (_1, _2) => UpdateSidebarHeights();
-
-            description = $"Time before the dynamic height is shrunken again. Helps to box resizes when moving between cards.{Environment.NewLine}{reload}";
-            heightChangeCooldown = Config.GetEntry<float>("Height Change Cooldown", 0.1f);
-            heightChangeCooldown.ExtraData["tooltip"] = description;
-            // heightChangeCooldown.SettingChanged += (_1, _2) => UpdateSidebarHeights();
+            heightChangeCooldown = Config.GetEntry<float>("Height Change Cooldown", 0.1f, new ConfigUI {
+                Tooltip = $"Time before the dynamic height is shrunken again. Helps to box resizes when moving between cards",
+            });
+            heightChangeCooldown.OnChanged += (_) => UpdateSidebarHeights();
         }
 
         [HarmonyPatch(typeof(GameScreen), nameof(GameScreen.LateUpdate)), HarmonyPostfix]
@@ -78,8 +75,8 @@ namespace HigherSidebar {
         }
 
         private static float CalculateHeight() {
-            if (!dynamicHeight.GetBool()) {
-                return infoBoxHeight.GetFloat();
+            if (!dynamicHeight.Value) {
+                return infoBoxHeight.Value;
             }
 
             GameScreen.instance.InfoText.text = GameScreen.instance.InfoText.text.Trim();
@@ -92,7 +89,7 @@ namespace HigherSidebar {
                 }
             }
 
-            return Mathf.Clamp(preferredHeight, infoBoxMinHeight.GetFloat(), infoBoxMaxHeight.GetFloat());
+            return Mathf.Clamp(preferredHeight, infoBoxMinHeight.Value, infoBoxMaxHeight.Value);
         }
 
         private static void UpdateSidebarHeights() {
@@ -107,7 +104,7 @@ namespace HigherSidebar {
                 return;
             }
 
-            if (newHeight < lastHeight && heightCooldown < heightChangeCooldown.GetFloat()) {
+            if (newHeight < lastHeight && heightCooldown < heightChangeCooldown.Value) {
                 heightCooldown += Time.deltaTime;
                 return;
             }
